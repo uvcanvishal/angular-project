@@ -49,6 +49,15 @@ export class NewPostComponent {
             this.imgSrc = this.post['postImgPath'];
             this.formStatus = 'Edit';
           })
+        }else{
+          this.postForm = this.fb.group({
+            title: ['',[Validators.required, Validators.minLength(10)]],
+            permalink: ['',Validators.required],
+            excerpt: ['',[Validators.required, Validators.minLength(10)]],
+            category: ['',Validators.required],
+            postImg: ['',Validators.required],
+            content: ['',Validators.required]
+          })
         }
         //console.log(val);
         

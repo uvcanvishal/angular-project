@@ -70,4 +70,25 @@ export class PostsService {
       this.router.navigate(['/posts']);
     })
   }
+
+  deleteImage(postImgPath,id){
+    this.storage.storage.refFromURL(postImgPath).delete().then(()=>{
+      this.deleteData(id);
+    })
+  }
+
+  deleteData(id){
+    const docInstance = doc(this.afs,"posts",id);
+    deleteDoc(docInstance).then(()=>{
+      console.log("Data Deleted");
+      this.toastr.warning('Data Deleted ..!');
+    })
+  }
+
+  markFeatured(id,featuredData){
+    const docInstance = doc(this.afs,'posts',id);
+    updateDoc(docInstance,featuredData).then(docref=>{
+      this.toastr.info('Featured Status Updated ..!');
+    })
+  }
 }
